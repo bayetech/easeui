@@ -36,17 +36,38 @@ public class EaseUserUtils {
      * @param username
      */
     public static void setUserAvatar(Context context, String username, ImageView imageView){
-    	EaseUser user = getUserInfo(username);
+        EaseUser user = getUserInfo(username);
         if(user != null && user.getAvatar() != null){
             try {
                 int avatarResId = Integer.parseInt(user.getAvatar());
                 Glide.with(context).load(avatarResId).into(imageView);
             } catch (Exception e) {
                 //use default avatar
-                Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
+                Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.message_list_item_icon).into(imageView);
             }
         }else{
-            Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);
+            Glide.with(context).load(R.drawable.message_list_item_icon).into(imageView);
+        }
+    }
+
+    /**
+     *  联系人，聊天内容
+     * @param context
+     * @param username
+     * @param imageView
+     */
+    public static void setUserAvatar2(Context context, String username, ImageView imageView){
+        EaseUser user = getUserInfo(username);
+        if(user != null && user.getAvatar() != null){
+            try {
+                int avatarResId = Integer.parseInt(user.getAvatar());
+                Glide.with(context).load(avatarResId).into(imageView);
+            } catch (Exception e) {
+                //use default avatar
+                Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.chat_contacst_content_icon).into(imageView);
+            }
+        }else{
+            Glide.with(context).load(R.drawable.chat_contacst_content_icon).into(imageView);
         }
     }
     
