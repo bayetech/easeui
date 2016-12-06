@@ -227,4 +227,18 @@ public class EaseEmojicon {
          */
         BIG_EXPRESSION
     }
+
+    @Override
+    public String toString() {
+        return "EaseEmojicon{" +
+                "identityCode='" + identityCode + '\'' +
+                ", icon=" + icon +
+                ", bigIcon=" + bigIcon +
+                ", emojiText='" + emojiText + '\'' +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", iconPath='" + iconPath + '\'' +
+                ", bigIconPath='" + bigIconPath + '\'' +
+                '}';
+    }
 }

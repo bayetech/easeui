@@ -73,7 +73,7 @@ public class EaseEmojiconMenu extends EaseEmojiconMenuBase{
 	    
 	    pagerView.setPagerViewListener(new EmojiconPagerViewListener());
         pagerView.init(emojiconGroupList, emojiconColumns,bigEmojiconColumns);
-        
+
         tabBar.setTabBarItemClickListener(new EaseScrollTabBarItemClickListener() {
             
             @Override

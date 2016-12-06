@@ -66,6 +66,14 @@ public class EaseEmojiconGroupEntity {
     public void setType(EaseEmojicon.Type type) {
         this.type = type;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "EaseEmojiconGroupEntity{" +
+                "emojiconList=" + emojiconList +
+                ", icon=" + icon +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }

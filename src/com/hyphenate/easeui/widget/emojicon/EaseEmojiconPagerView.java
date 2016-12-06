@@ -26,19 +26,19 @@ public class EaseEmojiconPagerView extends ViewPager{
     private List<EaseEmojiconGroupEntity> groupEntities;
 
     private PagerAdapter pagerAdapter;
-    
+
     private int emojiconRows = 3;
     private int emojiconColumns = 7;
-    
+
     private int bigEmojiconRows = 2;
     private int bigEmojiconColumns = 4;
-    
+
     private int firstGroupPageSize;
-    
+
     private int maxPageCount;
     private int previousPagerPosition;
 	private EaseEmojiconPagerViewListener pagerViewListener;
-    private List<View> viewpages; 
+    private List<View> viewpages;
 
     public EaseEmojiconPagerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -48,17 +48,17 @@ public class EaseEmojiconPagerView extends ViewPager{
     public EaseEmojiconPagerView(Context context) {
         this(context, null);
     }
-    
-    
+
+
     public void init(List<EaseEmojiconGroupEntity> emojiconGroupList, int emijiconColumns, int bigEmojiconColumns){
         if(emojiconGroupList == null){
             throw new RuntimeException("emojiconGroupList is null");
         }
-        
+
         this.groupEntities = emojiconGroupList;
         this.emojiconColumns = emijiconColumns;
         this.bigEmojiconColumns = bigEmojiconColumns;
-        
+
         viewpages = new ArrayList<View>();
         for(int i = 0; i < groupEntities.size(); i++){
             EaseEmojiconGroupEntity group = groupEntities.get(i);
@@ -70,21 +70,21 @@ public class EaseEmojiconPagerView extends ViewPager{
             maxPageCount = Math.max(gridViews.size(), maxPageCount);
             viewpages.addAll(gridViews);
         }
-        
+
         pagerAdapter = new EmojiconPagerAdapter(viewpages);
         setAdapter(pagerAdapter);
         setOnPageChangeListener(new EmojiPagerChangeListener());
-        
+
         if(pagerViewListener != null){
             pagerViewListener.onPagerViewInited(maxPageCount, firstGroupPageSize);
         }
     }
-    
+
     public void setPagerViewListener(EaseEmojiconPagerViewListener pagerViewListener){
     	this.pagerViewListener = pagerViewListener;
     }
-    
-    
+
+
     /**
      * set emojicon group position
      * @param position
@@ -98,7 +98,7 @@ public class EaseEmojiconPagerView extends ViewPager{
             setCurrentItem(count);
         }
     }
-    
+
     /**
      * get emojicon group gridview list
      * @param groupEntity
@@ -112,7 +112,7 @@ public class EaseEmojiconPagerView extends ViewPager{
         if(emojiType == Type.BIG_EXPRESSION){
             itemSize = bigEmojiconColumns * bigEmojiconRows;
         }
-        int pageSize = totalSize % itemSize == 0 ? totalSize/itemSize : totalSize/itemSize + 1;   
+        int pageSize = totalSize % itemSize == 0 ? totalSize/itemSize : totalSize/itemSize + 1;
         List<View> views = new ArrayList<View>();
         for(int i = 0; i < pageSize; i++){
             View view = View.inflate(context, R.layout.ease_expression_gridview, null);
@@ -147,17 +147,17 @@ public class EaseEmojiconPagerView extends ViewPager{
                         }else{
                             pagerViewListener.onExpressionClicked(emojicon);
                         }
-                        
+
                     }
-                    
+
                 }
             });
-            
+
             views.add(view);
         }
         return views;
     }
-    
+
 
     /**
      * add emojicon group
@@ -176,7 +176,7 @@ public class EaseEmojiconPagerView extends ViewPager{
             pagerAdapter.notifyDataSetChanged();
         }
     }
-    
+
     /**
      * remove emojicon group
      * @param position
@@ -189,7 +189,7 @@ public class EaseEmojiconPagerView extends ViewPager{
             pagerAdapter.notifyDataSetChanged();
         }
     }
-    
+
     /**
      * get size of pages
      * @param emojiconList
@@ -203,10 +203,10 @@ public class EaseEmojiconPagerView extends ViewPager{
         if(emojiType == Type.BIG_EXPRESSION){
             itemSize = bigEmojiconColumns * bigEmojiconRows;
         }
-        int pageSize = totalSize % itemSize == 0 ? totalSize/itemSize : totalSize/itemSize + 1;   
+        int pageSize = totalSize % itemSize == 0 ? totalSize/itemSize : totalSize/itemSize + 1;
         return pageSize;
     }
-    
+
     private class EmojiPagerChangeListener implements OnPageChangeListener{
         @Override
         public void onPageSelected(int position) {
@@ -232,21 +232,21 @@ public class EaseEmojiconPagerView extends ViewPager{
             			}
             			break;
             		}
-            		
+
             		//page changed
             		if(pagerViewListener != null){
             			pagerViewListener.onGroupInnerPagePostionChanged(previousPagerPosition-endSize, position-endSize);
             		}
             		break;
-            		
+
             	}
             	groupPosition++;
             	endSize += groupPageSize;
             }
-            
+
             previousPagerPosition = position;
         }
-        
+
         @Override
         public void onPageScrollStateChanged(int arg0) {
         }
@@ -254,9 +254,9 @@ public class EaseEmojiconPagerView extends ViewPager{
         public void onPageScrolled(int arg0, float arg1, int arg2) {
         }
     }
-    
-    
-    
+
+
+
     public interface EaseEmojiconPagerViewListener{
         /**
          * pagerview initialized
@@ -264,7 +264,7 @@ public class EaseEmojiconPagerView extends ViewPager{
          * @param firstGroupPageSize-- size of first group pages
          */
         void onPagerViewInited(int groupMaxPageSize, int firstGroupPageSize);
-        
+
     	/**
     	 * group position changed
     	 * @param groupPosition--group position
@@ -277,22 +277,22 @@ public class EaseEmojiconPagerView extends ViewPager{
     	 * @param newPosition
     	 */
     	void onGroupInnerPagePostionChanged(int oldPosition, int newPosition);
-    	
+
     	/**
     	 * group page position changed
     	 * @param position
     	 */
     	void onGroupPagePostionChangedTo(int position);
-    	
+
     	/**
     	 * max page size changed
     	 * @param maxCount
     	 */
     	void onGroupMaxPageSizeChanged(int maxCount);
-    	
+
     	void onDeleteImageClicked();
     	void onExpressionClicked(EaseEmojicon emojicon);
-    	
+
     }
 
 }
