@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.controller.EaseUI;
@@ -43,7 +44,7 @@ public class EaseUserUtils {
                 Glide.with(context).load(avatarResId).into(imageView);
             } catch (Exception e) {
                 //use default avatar
-                Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.message_list_item_icon).into(imageView);
+                Glide.with(context).load(user.getAvatar()).priority(Priority.HIGH).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.message_list_item_icon).into(imageView);
             }
         }else{
             Glide.with(context).load(R.drawable.message_list_item_icon).into(imageView);
@@ -64,7 +65,7 @@ public class EaseUserUtils {
                 Glide.with(context).load(avatarResId).into(imageView);
             } catch (Exception e) {
                 //use default avatar
-                Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.chat_contacst_content_icon).into(imageView);
+                Glide.with(context).load(user.getAvatar()).priority(Priority.HIGH).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.chat_contacst_content_icon).into(imageView);
             }
         }else{
             Glide.with(context).load(R.drawable.chat_contacst_content_icon).into(imageView);
