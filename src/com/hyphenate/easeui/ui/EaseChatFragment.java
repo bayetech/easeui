@@ -527,18 +527,17 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             }
 
             @Override
-            public void onRemovedFromChatRoom(String roomId, String roomName, String participant) {
+            public void onMemberKicked(String roomId, String roomName, String participant) {
                 if (roomId.equals(toChatUsername)) {
                     String curUser = EMClient.getInstance().getCurrentUser();
                     if (curUser.equals(participant)) {
-                    	EMClient.getInstance().chatroomManager().leaveChatRoom(toChatUsername);
+                        EMClient.getInstance().chatroomManager().leaveChatRoom(toChatUsername);
                         getActivity().finish();
                     }else{
                         showChatroomToast("member : " + participant + " was kicked from the room : " + roomId + " room name : " + roomName);
                     }
                 }
             }
-
         };
         
         EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChangeListener);
@@ -581,19 +580,19 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     }
 
     @Override
-    public void onMessageRead(List<EMMessage> messages) {
+    public void onMessageReadAckReceived(List<EMMessage> list) {
         if(isMessageListInited) {
             messageList.refresh();
         }
     }
 
     @Override
-    public void onMessageDelivered(List<EMMessage> messages) {
+    public void onMessageDeliveryAckReceived(List<EMMessage> list) {
         if(isMessageListInited) {
             messageList.refresh();
         }
     }
-
+    
     @Override
     public void onMessageChanged(EMMessage emMessage, Object change) {
         if(isMessageListInited) {
@@ -999,6 +998,20 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             });
         }
 
+        @Override
+        public void onApplicationDeclined(String s, String s1, String s2, String s3) {
+
+        }
+
+        @Override
+        public void onApplicationAccept(String s, String s1, String s2) {
+
+        }
+
+        @Override
+        public void onApplicationReceived(String s, String s1, String s2, String s3) {
+
+        }
     }
     
    
